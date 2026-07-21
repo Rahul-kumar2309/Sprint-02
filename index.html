@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash-Flow Dashboard | Prodesk IT</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Critical Alert Banner (Hidden by default) -->
+    <div id="alert-banner" class="alert-banner hidden">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Critical Warning: Your Remaining Balance has dropped below 10% of your Total Salary!</span>
+    </div>
+
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div>
+                <h1>Cash-Flow</h1>
+                <p>Enterprise Financial Dashboard</p>
+            </div>
+            <div class="header-actions">
+                <button id="toggle-currency" class="btn secondary-btn">
+                    <i class="fa-solid fa-money-bill-transfer"></i> <span id="currency-label">Switch to USD</span>
+                </button>
+                <button id="download-report" class="btn primary-btn">
+                    <i class="fa-solid fa-download"></i> Export PDF
+                </button>
+            </div>
+        </header>
+
+        <main class="grid-layout">
+            <!-- Left Column: Controls & Inputs -->
+            <aside class="control-panel">
+                <div class="card form-card">
+                    <h2>Financial Inputs</h2>
+                    <div id="ui-error" class="ui-error hidden"></div>
+                    
+                    <form id="cash-flow-form">
+                        <div class="input-group">
+                            <label for="salary">Total Salary</label>
+                            <input type="number" id="salary" placeholder="Enter Base Salary (e.g., 50000)" step="any" min="1">
+                        </div>
+                        
+                        <hr class="divider">
+                        
+                        <div class="input-group">
+                            <label for="expense-name">Expense Name</label>
+                            <input type="text" id="expense-name" placeholder="e.g., Software Subscription">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="expense-amount">Expense Amount</label>
+                            <input type="number" id="expense-amount" placeholder="e.g., 1500" step="any" min="1">
+                        </div>
+                        
+                        <button type="submit" class="btn submit-btn">
+                            <i class="fa-solid fa-plus"></i> Add Transaction
+                        </button>
+                    </form>
+                </div>
+            </aside>
+
+            <!-- Right Column: Visualization & Logs -->
+            <section class="display-panel">
+                <!-- Stats Row -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Salary</h3>
+                        <p id="display-salary" class="stat-value">₹0.00</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Expenses</h3>
+                        <p id="display-expenses" class="stat-value danger">₹0.00</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Remaining Balance</h3>
+                        <p id="display-balance" class="stat-value success">₹0.00</p>
+                    </div>
+                </div>
+
+                <!-- Visualization & List Row -->
+                <div class="data-grid">
+                    <div class="card chart-card">
+                        <h3>Expense Visualization</h3>
+                        <div class="canvas-container">
+                            <canvas id="expenseChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="card list-card">
+                        <h3>Transaction Log</h3>
+                        <ul id="expense-list" class="expense-list">
+                            <!-- Injected via JS -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Internal Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
